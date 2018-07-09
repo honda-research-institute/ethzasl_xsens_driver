@@ -1,12 +1,19 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(xsens_driver)
 
+# Add CMake modules folder BEFORE we try to find libraries
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../common_modules/CMakeModules/CMakeLists.txt)
+
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  rospy std_msgs tf sensor_msgs geometry_msgs diagnostic_msgs
+  roscpp rospy std_msgs tf sensor_msgs geometry_msgs diagnostic_msgs
 )
+find_package(honda_msgs 1.0.0 REQUIRED)
+find_package(honda_libs 1.0.0 REQUIRED)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -78,9 +85,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES test_py
-  CATKIN_DEPENDS rospy std_msgs tf sensor_msgs geometry_msgs diagnostic_msgs
+  CATKIN_DEPENDS honda_msgs roscpp rospy std_msgs tf sensor_msgs geometry_msgs diagnostic_msgs
 #  DEPENDS system_lib
 )
 
@@ -92,7 +99,9 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
+  ${honda_libs_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
@@ -101,16 +110,16 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-# add_executable(test_py_node src/test_py_node.cpp)
+add_executable(hri_xsens_wrapper_node src/hri_xsens_wrapper.cpp src/hri_xsens_wrapper_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(test_py_node test_py_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(test_py_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(hri_xsens_wrapper_node
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##

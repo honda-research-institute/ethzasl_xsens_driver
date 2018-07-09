@@ -24,4 +24,25 @@
         <rosparam param="orientation_covariance_diagonal" subst_value="True">$(arg orientation_covariance_diagonal)</rosparam>
       </node>
     </group>
+
+    <node pkg="xsens_driver" type="hri_xsens_wrapper_node" name="hri_xsens_wrapper_node" output="screen">
+      <param name="gps_output_topic" value="/xsens_gps_reading"/>
+      <param name="xsens_ns" value="/mtig710"/>
+    </node>
+
+    <node pkg="gps2hriframe" type="gps2hriframe_node" name="gps2hriframe_node_xsens" output="screen" >
+        <param name="lat_ref" value="37.390" type="double" />
+        <param name="lon_ref" value="-122.052" type="double" />
+        <param name="hea_ref" value="310.75" type="double" />
+        <param name="alt_ref" value="0.0" type="double" />
+        <param name="veh_state_rate" value="25.0" type="double" />
+        <param name="base_link_tf_rate" value="25.0" type="double" />
+        <param name="offset_x" value="0.4" type="double" />
+        <param name="offset_y" value="0.0" type="double" />
+        <param name="offset_z" value="-0.4" type="double" />
+        <param name="head_north_east" value="true" type="bool" />
+        <param name="topic_name_gps" value="xsens_gps_reading" />
+        <param name="topic_name_veh_state" value="vehicle_state_xsens" />
+        <param name="tf_name_gps" value="base_link_xsens"/>
+    </node>
 </launch>
