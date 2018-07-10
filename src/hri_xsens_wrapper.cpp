@@ -31,7 +31,7 @@ void HriXSensWrapper::initSubscribers() {
           nh_m, params_m.xsens_ns + "/fix", 1);
 
   sub_imu_m = std::make_shared<message_filters::Subscriber<sensor_msgs::Imu>>(
-      nh_m, params_m.xsens_ns + "/imu", 1);
+      nh_m, params_m.xsens_ns + "/imu/data", 1);
 
   message_synchronizer_m = std::make_shared<Synchronizer<MessageSyncPolicy>>(
       MessageSyncPolicy(10), *sub_velocity_m, *sub_fix_m, *sub_imu_m);

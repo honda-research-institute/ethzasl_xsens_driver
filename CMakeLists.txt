@@ -102,6 +102,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${honda_libs_INCLUDE_DIRS}
+  ${honda_msgs_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
@@ -118,8 +119,9 @@ add_executable(hri_xsens_wrapper_node src/hri_xsens_wrapper.cpp src/hri_xsens_wr
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(hri_xsens_wrapper_node
-  ${catkin_LIBRARIES}
+  ${catkin_LIBRARIES} ${honda_libs_LIBRARIES} ${honda_msgs_LIBRARIES}
 )
+add_dependencies(hri_xsens_wrapper_node ${PROJECT_NAME}_gencfg ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 #############
 ## Install ##
