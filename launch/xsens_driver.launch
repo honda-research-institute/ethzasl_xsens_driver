@@ -11,7 +11,7 @@
     <arg name="orientation_covariance_diagonal" default="[0.01745, 0.01745, 0.15708]" doc="Diagonal elements of the orientation covariance matrix"/>
 
     <!-- node -->
-    <group ns="mtig710">
+    <group ns="xsens">
       <node pkg="xsens_driver" type="mtnode.py" name="xsens_driver" output="screen" >
         <param name="device" value="$(arg device)"/>
         <param name="baudrate" value="$(arg baudrate)"/>
@@ -27,7 +27,7 @@
 
     <node pkg="xsens_driver" type="hri_xsens_wrapper_node" name="hri_xsens_wrapper_node" output="screen">
       <param name="gps_output_topic" value="/xsens_gps_reading"/>
-      <param name="xsens_ns" value="/mtig710"/>
+      <param name="xsens_ns" value="/xsens"/>
     </node>
 
     <node pkg="gps2hriframe" type="gps2hriframe_node" name="gps2hriframe_node_xsens" output="screen" >
