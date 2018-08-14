@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="publish_vehicle_state_from_xsens" default="false" />
+    <arg name="publish_vehicle_state_from_xsens" default="true" />
 
     <!-- parameters -->
     <!--arg name="device" default="auto" doc="device file of the IMU"/ --> <!-- Use this if you are running on DrivePX -->

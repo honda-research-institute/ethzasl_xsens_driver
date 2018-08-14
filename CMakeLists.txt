@@ -1,9 +1,16 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(xsens_driver)
 
-# Add CMake modules folder BEFORE we try to find libraries
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../common_modules/CMakeModules/CMakeLists.txt)
 
+# C++11
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+if(COMPILER_SUPPORTS_CXX11)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  #message(STATUS "Using C++11")
+else()
+  message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
