@@ -16,7 +16,7 @@
 
     <!-- node -->
     <group ns="xsens">
-      <node pkg="xsens_driver" type="mtnode.py" name="xsens_driver" output="screen" >
+      <node pkg="xsens_driver" type="mtnode.py" name="xsens_driver" output="screen" respawn="true" respawn_delay="5">
         <param name="device" value="$(arg device)"/>
         <param name="baudrate" value="$(arg baudrate)"/>
         <param name="timeout" value="$(arg timeout)"/>
